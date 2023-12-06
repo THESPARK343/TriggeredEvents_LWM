@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Hospital_Level.unity
+    guid: 88d629a32f273c644b8271c5d4b8da4a
+  - enabled: 1
+    path: Assets/Scenes/LossScreen.unity
+    guid: 77d9eeabdece40b4e961e4e52ef7f288
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: f1179f6e7740e604e883f80b72eb774e
   m_configObjects: {}

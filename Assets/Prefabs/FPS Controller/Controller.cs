@@ -14,7 +14,7 @@ public class Controller : MonoBehaviour
     public static Controller Instance { get; protected set; }
 
     public Camera MainCamera;
-
+    public GameObject darkness;
     public Transform CameraPosition;   
 
     [Header("Control Settings")]
@@ -113,7 +113,11 @@ public class Controller : MonoBehaviour
             }
 
             // Move around with WASD
-            move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            if (darkness.activeSelf == false)
+            {
+                move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+            }
             if (move.sqrMagnitude > 1.0f)
                 move.Normalize();
 
@@ -125,8 +129,11 @@ public class Controller : MonoBehaviour
             m_CharacterController.Move(move);
 
             // Turn player
-            float turnPlayer = Input.GetAxis("Mouse X") * MouseSensitivity;
-            m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
+            if (darkness.activeSelf == false)
+            {
+                float turnPlayer = Input.GetAxis("Mouse X") * MouseSensitivity;
+                m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
+            }
 
             if (m_HorizontalAngle > 360) m_HorizontalAngle -= 360.0f;
             if (m_HorizontalAngle < 0) m_HorizontalAngle += 360.0f;
@@ -136,7 +143,9 @@ public class Controller : MonoBehaviour
             transform.localEulerAngles = currentAngles;
 
             // Camera look up/down
-            var turnCam = -Input.GetAxis("Mouse Y");
+            if (darkness.activeSelf == false)
+            {
+                var turnCam = -Input.GetAxis("Mouse Y");
             turnCam = turnCam * MouseSensitivity;
             m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -89.0f, 89.0f);
             currentAngles = CameraPosition.transform.localEulerAngles;
@@ -144,6 +153,8 @@ public class Controller : MonoBehaviour
             CameraPosition.transform.localEulerAngles = currentAngles;
 
 
+
+            }
 
             Speed = move.magnitude / (PlayerSpeed * Time.deltaTime);
 
